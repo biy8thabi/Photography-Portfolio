@@ -159,6 +159,11 @@
       object-fit: cover;
       transition: transform .55s cubic-bezier(.2, .65, .3, 1);
     }
+    /* Keep faces in frame when tall photos are cropped into wide or square tiles. */
+    .gallery-item:nth-child(1) img { object-position: 50% 40%; }
+    .gallery-item:nth-child(3) img { object-position: 50% 15%; }
+    .gallery-item:nth-child(6) img { object-position: 50% 20%; }
+    .gallery-item:nth-child(7) img { object-position: 50% 65%; }
     .gallery-item a { display: block; flex: 1; min-height: 0; overflow: hidden; }
     .gallery-item a:hover img { transform: scale(1.035); }
     .gallery-item figcaption {
@@ -260,43 +265,43 @@
       <div class="gallery">
         <figure class="gallery-item">
           <a href="#contact" aria-label="Enquire about portrait photography">
-            <div class="image-frame"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=85" alt="Portrait of a woman in warm natural light" fetchpriority="high"></div>
+            <div class="image-frame"><img src="images/gallery-01.jpg" alt="Woman with long black hair resting her chin on her hand, looking into the camera" fetchpriority="high"></div>
           </a>
           <figcaption><span>Soft light, portrait study</span><span>01 / Portraits</span></figcaption>
         </figure>
         <figure class="gallery-item">
           <a href="#contact" aria-label="Enquire about travel photography">
-            <div class="image-frame"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=85" alt="Quiet mountain lake surrounded by trees" loading="lazy"></div>
+            <div class="image-frame"><img src="images/gallery-02.jpg" alt="Smiling woman with a full afro in warm sunlight, wearing a white ribbed top" loading="lazy"></div>
           </a>
           <figcaption><span>Somewhere quiet</span><span>02 / Places</span></figcaption>
         </figure>
         <figure class="gallery-item">
           <a href="#contact" aria-label="Enquire about editorial photography">
-            <div class="image-frame"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=85" alt="Editorial fashion portrait on a city street" loading="lazy"></div>
+            <div class="image-frame"><img src="images/gallery-03.jpg" alt="Woman with a large afro and gold choker in a houndstooth coat on a city street" loading="lazy"></div>
           </a>
           <figcaption><span>City in motion</span><span>03 / Editorial</span></figcaption>
         </figure>
         <figure class="gallery-item">
           <a href="#contact" aria-label="Enquire about landscape photography">
-            <div class="image-frame"><img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1400&q=85" alt="Golden morning light over a misty landscape" loading="lazy"></div>
+            <div class="image-frame"><img src="images/gallery-04.jpg" alt="Close-up beauty portrait of a woman in a white hooded wrap with blue eyeshadow, against a peach background" loading="lazy"></div>
           </a>
           <figcaption><span>First light</span><span>04 / Landscapes</span></figcaption>
         </figure>
         <figure class="gallery-item">
           <a href="#contact" aria-label="Enquire about still-life photography">
-            <div class="image-frame"><img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=85" alt="Delicate flowers in soft natural light" loading="lazy"></div>
+            <div class="image-frame"><img src="images/gallery-05.jpg" alt="Woman with voluminous curly natural hair in front of a brick wall" loading="lazy"></div>
           </a>
           <figcaption><span>Small things</span><span>05 / Still life</span></figcaption>
         </figure>
         <figure class="gallery-item">
           <a href="#contact" aria-label="Enquire about lifestyle photography">
-            <div class="image-frame"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=85" alt="Natural-light lifestyle portrait" loading="lazy"></div>
+            <div class="image-frame"><img src="images/gallery-06.jpg" alt="Woman with an afro and a yellow flower in her hair, wearing a brown and cream striped sweater" loading="lazy"></div>
           </a>
           <figcaption><span>At ease</span><span>06 / Portraits</span></figcaption>
         </figure>
         <figure class="gallery-item">
           <a href="#contact" aria-label="Enquire about coastal photography">
-            <div class="image-frame"><img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=85" alt="Ocean waves rolling gently toward the shore" loading="lazy"></div>
+            <div class="image-frame"><img src="images/gallery-07.jpg" alt="Profile portrait of a woman with locs piled in a high bun against a soft beige background" loading="lazy"></div>
           </a>
           <figcaption><span>Between tides</span><span>07 / Coast</span></figcaption>
         </figure>
@@ -341,3 +346,4 @@
   </footer>
 </body>
 </html>
+
