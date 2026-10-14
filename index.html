@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Selected photography by Thabisa Biyela — portraits, places, and quiet moments.">
+  <title>Thabisa Biyela — Photographer</title>
+  <style>
+    :root {
+      --color-bg: #f6f4ef;
+      --color-paper: #fffefa;
+      --color-text: #242522;
+      --color-muted: #777970;
+      --color-line: #deddd5;
+      --color-accent: #a64f35;
+      --color-bg-translucent: rgba(246, 244, 239, .96);
+      --color-placeholder: #e5e1d8;
+      --content-width: 1160px;
+      --radius: 3px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    a:focus-visible, input:focus-visible, textarea:focus-visible, button:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 4px;
+    }
+    .wrap { width: min(var(--content-width), calc(100% - 48px)); margin-inline: auto; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--color-bg-translucent);
+      border-bottom: 1px solid var(--color-line);
+    }
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .wordmark {
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .nav-links { display: flex; align-items: center; gap: clamp(16px, 3vw, 34px); }
+    .nav-links a {
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      transition: color .2s ease;
+    }
+    .nav-links a:hover { color: var(--color-accent); }
+    .nav-links .nav-cta { color: var(--color-text); border-bottom: 1px solid var(--color-accent); padding-bottom: 4px; }
+
+    .hero { padding: clamp(64px, 10vw, 128px) 0 58px; }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--color-accent);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 850px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.1rem, 8.5vw, 7.3rem);
+      font-weight: 400;
+      letter-spacing: -.065em;
+      line-height: .98;
+    }
+    .hero-bottom {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-top: 34px;
+    }
+    .hero-copy { max-width: 430px; margin: 0; color: var(--color-muted); font-size: 1rem; }
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--color-accent);
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      white-space: nowrap;
+    }
+    .text-link span { color: var(--color-accent); font-size: 1.1rem; }
+
+    .gallery-section { padding: 24px 0 110px; }
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--color-line);
+      padding-bottom: 14px;
+    }
+    .section-heading h2, .about h2, .contact h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 400;
+      letter-spacing: -.035em;
+    }
+    .section-heading p { margin: 0; color: var(--color-muted); font-size: .78rem; }
+    /* An editorial, asymmetric gallery: varied tile widths and heights keep the
+       photographs feeling curated rather than locked into identical cards. */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-rows: 118px;
+      grid-auto-flow: dense;
+      gap: 16px;
+    }
+    .gallery-item { min-width: 0; min-height: 0; margin: 0; display: flex; flex-direction: column; }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 3; }
+    .gallery-item:nth-child(2) { grid-column: span 1; grid-row: span 3; }
+    .gallery-item:nth-child(3) { grid-column: span 1; grid-row: span 2; }
+    .gallery-item:nth-child(4) { grid-column: span 2; grid-row: span 3; }
+    .gallery-item:nth-child(5) { grid-column: span 1; grid-row: span 2; }
+    .gallery-item:nth-child(6) { grid-column: span 1; grid-row: span 2; }
+    .gallery-item:nth-child(7) { grid-column: span 2; grid-row: span 2; }
+    .image-frame {
+      height: 100%;
+      min-height: 0;
+      overflow: hidden;
+      background: var(--color-placeholder);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .55s cubic-bezier(.2, .65, .3, 1);
+    }
+    .gallery-item a { display: block; flex: 1; min-height: 0; overflow: hidden; }
+    .gallery-item a:hover img { transform: scale(1.035); }
+    .gallery-item figcaption {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 10px;
+      font-size: .76rem;
+    }
+    .gallery-item figcaption span:last-child { color: var(--color-muted); }
+
+    .about {
+      background: var(--color-paper);
+      border-top: 1px solid var(--color-line);
+      border-bottom: 1px solid var(--color-line);
+      padding: clamp(56px, 8vw, 100px) 0;
+    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(32px, 8vw, 120px); align-items: start; }
+    .about-copy { max-width: 550px; }
+    .about-copy p { margin: 0 0 18px; color: var(--color-muted); }
+    .about-copy p:first-child { color: var(--color-text); font-family: Georgia, "Times New Roman", serif; font-size: 1.35rem; line-height: 1.45; }
+
+    .contact { padding: clamp(64px, 9vw, 112px) 0; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; }
+    .contact-intro p { max-width: 390px; color: var(--color-muted); }
+    .contact-details { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .contact-details a { text-decoration: none; }
+    .contact-details a:hover { color: var(--color-accent); }
+    .contact-label { color: var(--color-muted); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; }
+    .email-link { font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.2rem, 2.5vw, 1.8rem); overflow-wrap: anywhere; }
+
+    footer { border-top: 1px solid var(--color-line); padding: 22px 0; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; color: var(--color-muted); font-size: .72rem; }
+    .footer-inner p { margin: 0; }
+
+
+    @media (min-width: 701px) and (max-width: 980px) {
+      .gallery { grid-auto-rows: 92px; gap: 12px; }
+      .gallery-item:nth-child(1), .gallery-item:nth-child(4) { grid-row: span 3; }
+      .gallery-item:nth-child(2) { grid-row: span 3; }
+      .gallery-item:nth-child(3), .gallery-item:nth-child(5), .gallery-item:nth-child(6) { grid-row: span 2; }
+      .gallery-item:nth-child(7) { grid-row: span 2; }
+    }
+
+    @media (max-width: 700px) {
+      .wrap { width: min(100% - 32px, var(--content-width)); }
+      .nav { min-height: 68px; align-items: flex-start; flex-direction: column; justify-content: center; gap: 9px; padding-block: 12px; }
+      .nav-links { width: 100%; justify-content: space-between; gap: 10px; }
+      .nav-links a { font-size: .68rem; }
+      .hero { padding-top: 70px; }
+      .hero-bottom { align-items: flex-start; flex-direction: column; gap: 20px; }
+      .gallery-section { padding-bottom: 72px; }
+      .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 100px; gap: 20px 12px; }
+      .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 3; }
+      .gallery-item:nth-child(2) { grid-column: span 1; grid-row: span 3; }
+      .gallery-item:nth-child(3) { grid-column: span 1; grid-row: span 2; }
+      .gallery-item:nth-child(4) { grid-column: span 2; grid-row: span 3; }
+      .gallery-item:nth-child(5), .gallery-item:nth-child(6) { grid-column: span 1; grid-row: span 2; }
+      .gallery-item:nth-child(7) { grid-column: span 2; grid-row: span 2; }
+      .gallery-item figcaption { align-items: flex-start; flex-direction: column; gap: 2px; font-size: .68rem; }
+      .section-heading { align-items: flex-start; flex-direction: column; gap: 5px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-inner { flex-direction: column; gap: 5px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="wordmark" href="#home">Thabisa Biyela / Photo</a>
+      <div class="nav-links">
+        <a href="#work">Selected work</a>
+        <a href="#about">About</a>
+        <a class="nav-cta" href="#contact">Book a shoot ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero wrap" aria-labelledby="page-title">
+      <p class="eyebrow">Independent photographer · Durban, South Africa</p>
+      <h1 id="page-title">Finding beauty<br>in the in-between.</h1>
+      <div class="hero-bottom">
+        <p class="hero-copy">Portraits, places, and passing moments — photographed with a little patience and a lot of feeling.</p>
+        <a class="text-link" href="#work">Explore selected work <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+
+    <section class="gallery-section wrap" id="work" aria-labelledby="work-title">
+      <div class="section-heading">
+        <h2 id="work-title">Selected work</h2>
+        <p>A collection of moments, 2023—2026</p>
+      </div>
+      <div class="gallery">
+        <figure class="gallery-item">
+          <a href="#contact" aria-label="Enquire about portrait photography">
+            <div class="image-frame"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=85" alt="Portrait of a woman in warm natural light" fetchpriority="high"></div>
+          </a>
+          <figcaption><span>Soft light, portrait study</span><span>01 / Portraits</span></figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <a href="#contact" aria-label="Enquire about travel photography">
+            <div class="image-frame"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=85" alt="Quiet mountain lake surrounded by trees" loading="lazy"></div>
+          </a>
+          <figcaption><span>Somewhere quiet</span><span>02 / Places</span></figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <a href="#contact" aria-label="Enquire about editorial photography">
+            <div class="image-frame"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=85" alt="Editorial fashion portrait on a city street" loading="lazy"></div>
+          </a>
+          <figcaption><span>City in motion</span><span>03 / Editorial</span></figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <a href="#contact" aria-label="Enquire about landscape photography">
+            <div class="image-frame"><img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1400&q=85" alt="Golden morning light over a misty landscape" loading="lazy"></div>
+          </a>
+          <figcaption><span>First light</span><span>04 / Landscapes</span></figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <a href="#contact" aria-label="Enquire about still-life photography">
+            <div class="image-frame"><img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=85" alt="Delicate flowers in soft natural light" loading="lazy"></div>
+          </a>
+          <figcaption><span>Small things</span><span>05 / Still life</span></figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <a href="#contact" aria-label="Enquire about lifestyle photography">
+            <div class="image-frame"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=85" alt="Natural-light lifestyle portrait" loading="lazy"></div>
+          </a>
+          <figcaption><span>At ease</span><span>06 / Portraits</span></figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <a href="#contact" aria-label="Enquire about coastal photography">
+            <div class="image-frame"><img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=85" alt="Ocean waves rolling gently toward the shore" loading="lazy"></div>
+          </a>
+          <figcaption><span>Between tides</span><span>07 / Coast</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="about-grid wrap">
+        <div>
+          <p class="eyebrow">A little about me</p>
+          <h2 id="about-title">People, places<br>and honest moments.</h2>
+        </div>
+        <div class="about-copy">
+          <p>I’m Thabisa, a photographer drawn to natural light, thoughtful details, and images that feel like memories.</p>
+          <p>I work with individuals, creatives, and small brands to make photographs that feel personal rather than posed. Based in Durban and available for projects across South Africa.</p>
+          <a class="text-link" href="#contact">Let’s make something <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact wrap" id="contact" aria-labelledby="contact-title">
+      <div class="contact-grid">
+        <div class="contact-intro">
+          <p class="eyebrow">Have a project in mind?</p>
+          <h2 id="contact-title">Let’s talk.</h2>
+          <p>For portraits, collaborations, or bookings, send a note with a little about what you have in mind.</p>
+        </div>
+        <div class="contact-details">
+          <span class="contact-label">Bookings & enquiries</span>
+          <a class="email-link" href="mailto:thabisabiyela234@gmail.com?subject=Photography%20enquiry">thabisabiyela234@gmail.com</a>
+          <a class="text-link" href="mailto:thabisabiyela234@gmail.com?subject=Book%20a%20shoot">Book a shoot <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner wrap">
+      <p>© 2026 Thabisa Biyela Photography</p>
+      <p>Made with care · Durban, South Africa</p>
+    </div>
+  </footer>
+</body>
+</html>
