@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+/* Our palette, from Assignment 1's :root variables.
+   Tailwind turns each --color-* into utilities: bg-bg, text-ink, border-line, etc. */
+@theme {
+  --color-bg: #f6f4ef;
+  --color-paper: #fffefa;
+  --color-ink: #242522;
+  --color-muted: #777970;
+  --color-line: #deddd5;
+  --color-accent: #a64f35;
+  --font-serif: Georgia, "Times New Roman", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
