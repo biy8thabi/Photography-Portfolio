@@ -18,6 +18,7 @@
     "dependencies": {
         "@better-auth/drizzle-adapter": "^1.7.14",
         "@neondatabase/serverless": "^1.2.0",
+        "better-auth": "^1.7.16",
         "cors": "^2.8.6",
         "dotenv": "^18.0.9",
         "drizzle-orm": "^0.45.4",
