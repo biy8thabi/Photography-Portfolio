@@ -1,3 +1,4 @@
+import { API_URL } from '../lib/api'
 import { useEffect, useState } from 'react'
 import PhotoCard from './PhotoCard'
 
@@ -18,7 +19,7 @@ function Gallery() {
   // Runs once, when the Gallery first appears on screen (the empty [] at the end means
   // "only once"). It asks the server for the photos and stores them in state.
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/photos`)
+    fetch(`${API_URL}/api/photos`)
       .then((res) => {
         if (!res.ok) throw new Error('Request failed')
         return res.json()
