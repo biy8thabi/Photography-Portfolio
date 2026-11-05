@@ -8,10 +8,10 @@ function PhotoCard({ photo, rating, onRate }) {
       {/* aspect-[4/5] gives every tile a definite shape, so object-cover can crop to fill it. */}
       <div className="aspect-[4/5] overflow-hidden bg-line">
         <img
-          src={photo.src}
+          src={photo.imageUrl}
           alt={photo.alt}
           loading="lazy"
-          style={{ objectPosition: photo.position }}
+          style={{ objectPosition: photo.objectPosition }}
           className="h-full w-full object-cover transition-transform duration-500 motion-safe:hover:scale-[1.035]"
         />
       </div>

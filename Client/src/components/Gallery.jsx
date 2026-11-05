@@ -1,18 +1,35 @@
-import { useState } from 'react'
-import photos from '../data/photos'
+import { useEffect, useState } from 'react'
 import PhotoCard from './PhotoCard'
 
-// Build the filter buttons from the data itself: "All" plus each unique category.
-const categories = ['All', ...new Set(photos.map((photo) => photo.category))]
-
 function Gallery() {
-  // STATE 1 — which filter is active. Changing it re-renders Gallery.
+  const [photos, setPhotos] = useState([])
+
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null) 
+  
+  // STATE 4 — which filter is active. Changing it re-renders Gallery.
   const [activeCategory, setActiveCategory] = useState('All')
 
-  // STATE 2 — the ratings, as an object keyed by photo id, e.g. { 1: 5, 4: 3 }.
+  // STATE 5 — the ratings, as an object keyed by photo id, e.g. { 1: 5, 4: 3 }.
   // It lives HERE (not inside each card) so a rating survives when a card
   // disappears from the grid because of the filter.
   const [ratings, setRatings] = useState({})
+
+  // Runs once, when the Gallery first appears on screen (the empty [] at the end means
+  // "only once"). It asks the server for the photos and stores them in state.
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/photos`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Request failed')
+        return res.json()
+      })
+      .then((data) => setPhotos(data))
+      .catch(() => setError('Could not load photos. Please try again later.'))
+      .finally(() => setLoading(false))
+  }, [])
+  
+  // Built from the photos AFTER they arrive: "All" plus each unique category.
+  const categories = ['All', ...new Set(photos.map((photo) => photo.category))]
 
   // Derived data: not state, just recalculated on every render from the state above.
   const visiblePhotos =
@@ -37,6 +54,13 @@ function Gallery() {
         </h2>
         <p className="text-xs text-muted">A collection of moments, 2023—2026</p>
       </div>
+      
+      {loading && <p className="text-muted">Loading photos…</p>}
+
+      {error && <p className="text-accent">{error}</p>}
+
+      {!loading && !error && (
+        <>
 
       <div className="mb-6 flex flex-wrap gap-2" role="group" aria-label="Filter photos by category">
         {categories.map((category) => (
@@ -67,6 +91,8 @@ function Gallery() {
           />
         ))}
       </div>
+        </>
+      )}
     </section>
   )
 }
