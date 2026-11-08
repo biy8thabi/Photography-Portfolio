@@ -2,7 +2,8 @@
 // hardcoded in the React app. Run it with:  npm run seed
 // It is safe to run more than once: it clears the table first, then inserts.
 import { db } from './db/index.js'
-import { photos } from './db/schema.js'
+import { sql } from 'drizzle-orm'
+import { photos, packages } from './db/schema.js'
 
 const seedData = [
   {
@@ -63,7 +64,45 @@ const seedData = [
   },
 ]
 
-await db.delete(photos)                 // remove any old rows so re-running doesn't duplicate
-await db.insert(photos).values(seedData) // insert all the rows in one go
+// The shoot packages people can buy. Prices are in cents: 12000 = 120.00.
+const packageData = [
+  {
+    id: 1,
+    name: 'Portrait session',
+    description: 'A one-hour portrait shoot with 15 edited photos delivered online.',
+    priceCents: 12000,
+  },
+  {
+    id: 2,
+    name: 'Brand shoot',
+    description: 'A half-day shoot for small brands and creatives, with 30 edited photos.',
+    priceCents: 30000,
+  },
+  {
+    id: 3,
+    name: 'Event coverage',
+    description: 'Up to four hours of event photography with a full online gallery.',
+    priceCents: 50000,
+  },
+]
 
+// Photos: clear and re-insert (nothing else refers to them).
+await db.delete(photos)
+await db.insert(photos).values(seedData)
+
+// Packages: UPDATE-or-insert instead of deleting, because orders point at packages
+// and Postgres won't let you delete a package that an order uses.
+await db
+  .insert(packages)
+  .values(packageData)
+  .onConflictDoUpdate({
+    target: packages.id,
+    set: {
+      name: sql`excluded.name`,
+      description: sql`excluded.description`,
+      priceCents: sql`excluded.price_cents`,
+    },
+  })
+
+console.log(`Seeded ${seedData.length} photos and ${packageData.length} packages`)
 console.log(`Seeded ${seedData.length} photos`)
